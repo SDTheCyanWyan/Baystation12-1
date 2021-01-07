@@ -81,6 +81,7 @@
 	#include "items/weapon/storage/wallets.dm"
 
 	#include "job/torch_access.dm"
+	#include "job/torch_goals.dm"
 	#include "job/torch_jobs.dm"
 	#include "job/command_jobs.dm"
 	#include "job/corporate_jobs.dm"

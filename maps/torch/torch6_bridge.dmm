@@ -1404,6 +1404,7 @@
 /obj/item/weapon/pen,
 /obj/item/weapon/pen/red,
 /obj/item/weapon/pen/blue,
+/obj/effect/landmark/paperwork_spawn_torch,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "cz" = (
@@ -4543,6 +4544,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
 	},
+/obj/effect/landmark/paperwork_spawn_torch,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
 "jz" = (
@@ -11917,6 +11919,7 @@
 /obj/item/weapon/folder/yellow,
 /obj/item/weapon/folder/white,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/effect/landmark/paperwork_finish_torch,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "Hg" = (
