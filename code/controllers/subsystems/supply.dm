@@ -9,6 +9,7 @@ SUBSYSTEM_DEF(supply)
 	var/points = 50
 	var/points_per_process = 1
 	var/points_per_slip = 2
+	var/points_per_animal = 1
 	var/point_sources = list()
 	var/pointstotalsum = 0
 	var/pointstotal = 0
@@ -26,7 +27,8 @@ SUBSYSTEM_DEF(supply)
 		"manifest" = "From exported manifests",
 		"crate" = "From exported crates",
 		"gep" = "From uploaded good explorer points",
-		"total" = "Total" // If you're adding additional point sources, add it here in a new line. Don't forget to put a comma after the old last line.
+		"total" = "Total",
+		"animal" = "From captured animals" // If you're adding additional point sources, add it here in a new line. Don't forget to put a comma after the old last line.
 	)
 
 /datum/controller/subsystem/supply/Initialize()
@@ -61,7 +63,7 @@ SUBSYSTEM_DEF(supply)
 
 	//To stop things being sent to centcomm which should not be sent to centcomm. Recursively checks for these types.
 /datum/controller/subsystem/supply/proc/forbidden_atoms_check(atom/A)
-	if(istype(A,/mob/living))
+	if(istype(A,/mob/living) && !isanimal(A))
 		return 1
 	if(istype(A,/obj/item/disk/nuclear))
 		return 1
@@ -80,6 +82,16 @@ SUBSYSTEM_DEF(supply)
 
 	for(var/area/subarea in shuttle.shuttle_area)
 		for(var/atom/movable/AM in subarea)
+
+			// Sell animals in nets
+			if(isanimal(AM))
+				var/mob/living/simple_animal/S = AM
+				if(S.stat)
+					add_points_from_source(points_per_animal, "animal")
+				else
+					add_points_from_source(points, "animal") // Reduced amount for dead animals.
+				continue
+
 			if(AM.anchored)
 				continue
 			if(istype(AM, /obj/structure/closet/crate/))
